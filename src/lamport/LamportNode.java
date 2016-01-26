@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,12 +26,14 @@ public class LamportNode {
     String id;
     int ownPort;
     HashMap<Integer, NodeStruct> structs;
+    ArrayList<Integer> keys;
     volatile int time;
 
     LamportNode(String id, int ownPort, HashMap<Integer, NodeStruct> structs) {
         this.id = id;
         this.ownPort = ownPort;
         this.structs = structs;
+        keys = new ArrayList(structs.keySet());
         time = 0;
     }
 
@@ -40,9 +44,13 @@ public class LamportNode {
             if (random.nextBoolean()) { //Local event
                 time += random.nextInt(4) + 1;
             } else {
-
+                sendMessage(structs.get(keys.get(random.nextInt(keys.size()+1))));
             }
         }
+    }
+
+    private void sendMessage(NodeStruct recipient) {
+        
     }
 
     private class ConnectionListener implements Runnable {

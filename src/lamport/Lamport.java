@@ -30,13 +30,13 @@ public class Lamport {
                     + " id corresponding to this node");
             System.exit(0);
         }
-         parseConf(args);
+        LamportNode lamport = parseConf(args);
     }
 
-    private static void parseConf(String[] args) {
+    private static LamportNode parseConf(String[] args) {
         HashMap<Integer, NodeStruct> structs = new HashMap();
         File file = new File(args[0]);
-        int ownPort;
+        int ownPort = 0;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
@@ -48,13 +48,14 @@ public class Lamport {
                  ownPort = Integer.parseInt(tmp[2]);   
                 }
             }
+            
         } catch (FileNotFoundException ex) {
             System.out.println("No configuration file provided. Aborting.");
             System.exit(1);
         } catch (IOException ex) {
             Logger.getLogger(Lamport.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+     return new LamportNode(args[1], ownPort, structs);   
     }
 
 }
