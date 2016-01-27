@@ -7,7 +7,7 @@ package lamport;
 
 /**
  *
- * @author laursuom
+ * @author Lauri Suomalainen, 013791364
  */
 /*
 This struct keeps track of the details of other nodes in the network.

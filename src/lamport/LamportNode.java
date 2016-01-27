@@ -58,8 +58,7 @@ public class LamportNode {
                     int seed = random.nextInt(keys.size()); //Select a random node from the list.
                     sendMessage(keys.get(seed),structs.get(keys.get(seed))); // Extract the node from the data structure, pass the id and the struct as an argument
                 }
-                eventTimer++; //Event has occured, increment timer
-                observeEventCount(); //Check, if 100 events have occured.
+                observeEventCount(); //Event has occured, increment timer. Check, if 100 events have occured.
                 sleep(4000); //Sleep for 4 seconds to make the program easier and pleasant to observe
             }
         } catch (InterruptedException ex) {
@@ -91,6 +90,7 @@ public class LamportNode {
     }
     
     public void observeEventCount(){
+        eventTimer++;
         if (eventTimer >= 100) { //When 100 events have occured, program terminates
             System.exit(1);
         }
@@ -114,7 +114,6 @@ public class LamportNode {
                     System.out.format("r %s %s %d %n", tmp[0], tmp[1], time);
                     in.close();
                     clientSocket.close();
-                    eventTimer++;
                     observeEventCount();
                     
                 }
