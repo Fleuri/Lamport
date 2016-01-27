@@ -31,6 +31,7 @@ public class Lamport {
             System.exit(0);
         }
         LamportNode lamport = parseConf(args);
+        lamport.start();
     }
 
     private static LamportNode parseConf(String[] args) {
@@ -43,7 +44,8 @@ public class Lamport {
             while ((line = reader.readLine()) != null) {
                 String[] tmp = line.trim().split("\\s+");
                 if (!tmp[0].equals(args[1])) {
-                    structs.put(Integer.parseInt(tmp[0]), new NodeStruct((tmp[1]), Integer.parseInt(tmp[2])));
+                    NodeStruct struct = new NodeStruct((tmp[1]), Integer.parseInt(tmp[2]));
+                    structs.put(Integer.parseInt(tmp[0]), struct);
                 } else {
                  ownPort = Integer.parseInt(tmp[2]);   
                 }
