@@ -30,10 +30,13 @@ public class Lamport {
                     + " id corresponding to this node");
             System.exit(0);
         }
-        LamportNode lamport = parseConf(args);
-        lamport.start();
+        LamportNode lamport = parseConf(args); //Initialize the node
+        lamport.start(); //Start the node
     }
-
+    
+    /*
+    Creates a configuration for this running node. Solves own port and saves other nodes to memory.
+    */
     private static LamportNode parseConf(String[] args) {
         HashMap<Integer, NodeStruct> structs = new HashMap();
         File file = new File(args[0]);
@@ -41,13 +44,13 @@ public class Lamport {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
-            while ((line = reader.readLine()) != null) {
-                String[] tmp = line.trim().split("\\s+");
-                if (!tmp[0].equals(args[1])) {
-                    NodeStruct struct = new NodeStruct((tmp[1]), Integer.parseInt(tmp[2]));
-                    structs.put(Integer.parseInt(tmp[0]), struct);
+            while ((line = reader.readLine()) != null) { //Reading as long as there are lines in the file
+                String[] tmp = line.trim().split("\\s+"); //Tokenize the line using whitespace as separator. Example: "1 localhost 5001" is put into an array of three elements.
+                if (!tmp[0].equals(args[1])) { // If not reading the line corresponding to this node.
+                    NodeStruct struct = new NodeStruct((tmp[1]), Integer.parseInt(tmp[2])); //Create a new struct for another node in the network, containing the address and port.
+                    structs.put(Integer.parseInt(tmp[0]), struct); //Save the struct with the corresponding node ID as a key
                 } else {
-                 ownPort = Integer.parseInt(tmp[2]);   
+                 ownPort = Integer.parseInt(tmp[2]);  // Retrieve the port this node should listen. 
                 }
             }
             
@@ -57,7 +60,7 @@ public class Lamport {
         } catch (IOException ex) {
             Logger.getLogger(Lamport.class.getName()).log(Level.SEVERE, null, ex);
         }
-     return new LamportNode(args[1], ownPort, structs);   
+     return new LamportNode(args[1], ownPort, structs);  //Return the new LamportNode object initializing it with the ID, portnumber and the data of other nodes 
     }
 
 }
