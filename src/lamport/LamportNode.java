@@ -50,7 +50,7 @@ public class LamportNode {
             while (true) {
                 Random random = new Random(); //Random.nextBoolean is used to pick pseudorandomly between a local event and sending a message
                 if (random.nextBoolean()) { //Local event
-                    int increase = random.nextInt(4) + 1; //Random increase to clock for a local event. Range 1-5.
+                    int increase = random.nextInt(5) + 1; //Random increase to clock for a local event. Range 1-5.
                     time = time + increase;
                     System.out.format("l %d %n", increase);
                     

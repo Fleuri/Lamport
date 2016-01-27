@@ -9,6 +9,9 @@ package lamport;
  *
  * @author laursuom
  */
+/*
+This struct keeps track of the details of other nodes in the network.
+*/
 public class NodeStruct {
     public String address;
     public int port;
