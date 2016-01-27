@@ -1,7 +1,7 @@
 This program implements Lamport Clock simulation as per this excercise http://www.cs.helsinki.fi/webfm_send/1746
 
 To run the program, compile java sources in /src/lamport/, namely Lamport.java, LamportNode.java and NodeStruct.java. Then run them.
-For your convenience a pre-built JAR package is also provided and can be found at /dist. Run with 'java -jar Lamport.java <arguments>'.
+For your convenience a pre-built JAR package is also provided and can be found at /dist. Run with 'java -jar Lamport.jar <arguments>'.
 
 As per the excercise, two arguments have to be provided. A configuration file of all the nodes in the simulation and the node ID of the running node.
 Two configuration files are provided at / : Config provides a three node setup on localhost and UkkoConfig provides a three node setup for University of Helsinki's Ukko cluster's machines 107-109.
